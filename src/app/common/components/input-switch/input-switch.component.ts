@@ -1,5 +1,7 @@
 import { Component, OnInit, OnChanges, OnDestroy, Input, Output, EventEmitter, SimpleChange } from '@angular/core';
-
+/**
+ * Model Driven Forms ?
+ */
 @Component({
   selector: 'app-input-switch',
   templateUrl: './input-switch.component.html',
