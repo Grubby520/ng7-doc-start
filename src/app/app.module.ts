@@ -8,13 +8,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { InputSwitchComponent } from './common/components/input-switch/input-switch.component';
+import { DocComponent } from './doc/doc.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    InputSwitchComponent,
+    DocComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
