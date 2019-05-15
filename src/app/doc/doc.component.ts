@@ -7,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocComponent implements OnInit {
   checked: boolean;
+  sliderValue: number;
 
   constructor() { }
 
   ngOnInit() {
     this.checked = Math.random() > .5 ? true : false;
+    this.sliderValue = 20;
   }
 
   btnChange(value: boolean) {

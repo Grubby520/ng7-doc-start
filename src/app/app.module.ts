@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { InputSwitchComponent } from './common/components/input-switch/input-switch.component';
 import { DocComponent } from './doc/doc.component';
 import { TestComponent } from './test/test.component';
+import { SliderComponent } from './common/components/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TestComponent } from './test/test.component';
     PageNotFoundComponent,
     InputSwitchComponent,
     DocComponent,
-    TestComponent
+    TestComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,

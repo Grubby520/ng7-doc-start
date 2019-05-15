@@ -1,5 +1,14 @@
-<div>
-  <h3>app-input-switch</h3>
-  <h3 class="first">value - {{checked}}</h3>
-  <app-input-switch (changeEvt)="btnChange($event)" [(value)]="checked"></app-input-switch>
+<div style="margin-left: 20px;">
+  <div>
+    <h3>app-input-switch</h3>
+    <h4>value - {{checked}}</h4>
+    <app-input-switch (changeEvt)="btnChange($event)" [(value)]="checked"></app-input-switch>
+  </div>
+  <div>
+    <h3>app-slider</h3>
+    <h4>value - {{sliderValue}}</h4>
+    <div style="width: 30%">
+      <app-slider [(value)]="sliderValue"></app-slider>
+    </div>
+</div>
 </div>
