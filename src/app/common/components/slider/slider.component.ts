@@ -7,35 +7,34 @@ import { Component, OnInit, OnChanges, OnDestroy, Input, Output,
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  private barWidth: number; // 滑块长度
+  private barHeight: number; // 滑块高度
   private dragging: boolean; // 拖动状态
-  private isClick: boolean; // 事件类型
-  private startX: number;
-  private startY: number;
-  private startPosition: number;
-  private newPosition: number;
-  private currentX: number;
-  private currentY: number;
-  private sliderSize: number; // 滑块长度
-  private precision: number; // 保留小数位数
-  @Input() value: number;
+  private isClick: boolean; // 区分拖动状态
+  private startPosition: number; // 起点位置
+  private startX: number; // 拖动起点x
+  private startY: number; // 拖动起点y
+  private newPosition: number; // 拖动过程中的新位置
+  @Input() value: number; // 滑块位置
   @Output() valueChange = new EventEmitter<any>();
-  @Input() vertical: boolean; // 垂直布局
-  @Input() max: number;
-  @Input() min: number;
-  @Input() step: number;
+  @Input() orientation: string; // 布局方式: 水平，垂直
+  @Input() max: number; // 最大值
+  @Input() min: number; // 最小值
+  @Input() step: number; // 步长
+  @Input() style: string;
+  @Input() styleClass: string;
   constructor(
     private el: ElementRef,
     private render: Renderer2
     ) {
       this.startPosition = 0;
-    this.value = 0;
-    this.dragging = true;
-    this.isClick = true;
-    this.vertical = false;
-    this.min = 0; // 起点的值
-    this.max = 100; // 终点的值
-    this.step = 100;
-    this.precision = 3; // 保留3位小数
+      this.orientation = 'horizontal';
+      this.value = 0;
+      this.dragging = false;
+      this.isClick = false;
+      this.min = 0;
+      this.max = 100;
+      this.step = 1;
   }
 
   ngOnInit() {
@@ -50,28 +49,35 @@ export class SliderComponent implements OnInit, AfterViewInit, AfterViewChecked 
   }
 
   /**
-   * 记录当前位置(相对位置 百分比)
+   * 记录当前位置(所占百分比值)
    */
   get currentPosition() {
-    return `${(this.value - this.min) / (this.max - this.min) * 100}%`;
+    return (this.value - this.min) / (this.max - this.min) * 100;
   }
 
   /**
    * 按下鼠标
    */
   handleMouseDown(event) {
-    console.log('down');
     console.log(event);
     this.getSliderSize();
-    console.log(this.sliderSize);
-    event.preventDefault();
-    // 初始化起点参数
+    // 记录起点参数
     this.onDragStart(event);
     // 添加事件处理器
-    this.render.listen('document', 'mousemove', () => {this.onDragging(event); });
-    this.render.listen('document', 'mouseup', () => {this.onDragEnd(event); });
-    // window.addEventListener('mousemove', this.onDragging);
-    // window.addEventListener('mouseup', this.onDragEnd);
+    this.render.listen('document', 'mousemove', (event) => {this.onDragging(event); });
+    this.render.listen('document', 'mouseup', (event) => {this.onDragEnd(event); });
+    event.preventDefault();
+  }
+
+  /**
+   * 获取轨道长度
+   */
+  getSliderSize(): void {
+    if (this.orientation === 'vertical') {
+      this.barHeight = this.el.nativeElement.children[0].offsetHeight;
+    } else {
+      this.barWidth = this.el.nativeElement.children[0].offsetWidth;
+    }
   }
 
   /**
@@ -80,12 +86,12 @@ export class SliderComponent implements OnInit, AfterViewInit, AfterViewChecked 
   onDragStart(event) {
     this.dragging = true;
     this.isClick = true;
-    if (this.vertical) {
+    if (this.orientation === 'vertical') {
       this.startY = event.clientY;
     } else {
       this.startX = event.clientX;
     }
-    this.startPosition = parseFloat(this.currentPosition); // 百分比值
+    this.startPosition = this.currentPosition;
   }
 
   /**
@@ -93,32 +99,21 @@ export class SliderComponent implements OnInit, AfterViewInit, AfterViewChecked 
    */
   onDragging(event) {
     if (this.dragging) {
-      console.log('dragging');
-      console.log(event);
       this.isClick = false; // 状态标识
-      let diff = 0;
-      if (this.vertical) {
-        this.currentY = event.clientY;
-        diff = (this.currentY - this.startY) / this.sliderSize * 100;
+      let diff = 0; // 移动距离所占百分比值
+      if (this.orientation === 'vertical') {
+        diff = (event.clientY - this.startY) / this.barHeight * 100;
       } else {
-        this.currentX = event.clientX;
-        console.log(this.currentX);
-        diff = (this.currentX - this.startX) / this.sliderSize * 100;
+        diff = (event.clientX - this.startX) / this.barWidth * 100;
       }
-      this.newPosition = this.startPosition + diff;
+      this.newPosition = this.startPosition + diff; // 总百分比值
       this.setPosition(this.newPosition);
     }
   }
 
-  onDragEnd(event) {
-    console.log('dragEnd');
-    this.dragging = false;
-    this.isClick = false;
-  }
-
   /**
    * 更新位置
-   * @param size 按钮所在位置的百分比值
+   * @param size 按钮所在位置的百分比值(24.385964912280702)
    */
   setPosition(newPosition: number) {
     if (newPosition === null || isNaN(newPosition)) {
@@ -130,42 +125,44 @@ export class SliderComponent implements OnInit, AfterViewInit, AfterViewChecked 
     if (newPosition > 100) {
       newPosition = 100;
     }
-    // const totalSteps = (this.max - this.min) / this.step; // 总步数
-    // const lengthPerStep = (this.max - this.min) / this.step; // 计算每一段的单位长度
-    // const steps = Math.round(newPosition / lengthPerStep); // 四舍五入,已移动段数
-    // const temp = (this.max - this.min) * 0.01; // 转换成百分比
-    // let value = steps * lengthPerStep * temp + this.min;
-    // value = parseFloat(value.toFixed(this.precision)); // 最新的位置
-    // console.log(newPosition);
-    this.value = newPosition;
+    /**
+     * 两个概念
+     * 实际移动的位置（200px长，当前移动到60.6px的位置，30.3/%）
+     * step：2
+     * 显示的范围长度（0-10，值只能为0，2，4，6，8，10）
+     * 将值转换到对应的正确的step位置上
+     */
+    const totalSteps = (this.max - this.min) / this.step; // 总步数 5
+    const lengthPerStep = 100 / totalSteps; // 一步占据的百分比值 20/%
+    const currentSteps = Math.round(newPosition / lengthPerStep); // 已滑动的步数 30.3/20=1.5步 四舍五入 2步
+    const temp = currentSteps * lengthPerStep * 0.01; // 所占刻度的百分比 40%
+    let currentLength = temp * (this.max - this.min) + this.min; // newPosition的实际step位置 40%*(10-0)+0 = 4
+    currentLength = parseFloat(currentLength.toFixed(0)); // 最新的位置
+    this.value = currentLength;
     this.valueChange.emit(this.value);
   }
+
+  onDragEnd(event) {
+    this.dragging = false;
+    this.isClick = false;
+  }
+
+
 
   /**
    * 点击移动到指定轨道位置
    */
   onSliderClick(event) {
-    console.log('sliderClick');
     if (this.dragging) {
       return ;
     }
     this.getSliderSize();
-    if (this.vertical) {
-
+    if (this.orientation === 'vertical') {
+      const sliderOffsetTop = this.el.nativeElement.children[0].getBoundingClientRect().top;
+      this.setPosition((event.clientX - sliderOffsetTop) / this.barHeight * 100);
     } else {
-      // const sliderOffsetLeft = ''
+      const sliderOffsetLeft = this.el.nativeElement.children[0].getBoundingClientRect().left;
+      this.setPosition((event.clientX - sliderOffsetLeft) / this.barWidth * 100);
     }
   }
-
-  /**
-   * 获取轨道长度
-   */
-  getSliderSize(): void {
-    if (this.vertical) {
-      this.sliderSize = this.el.nativeElement.firstChild.clientHeight;
-    } else {
-      this.sliderSize = this.el.nativeElement.firstChild.clientWidth;
-    }
-  }
-
 }

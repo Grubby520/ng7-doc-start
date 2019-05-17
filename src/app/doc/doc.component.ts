@@ -8,16 +8,23 @@ import { Component, OnInit } from '@angular/core';
 export class DocComponent implements OnInit {
   checked: boolean;
   sliderValue: number;
+  testValue: string;
+  sliderValueTwo: number;
 
   constructor() { }
 
   ngOnInit() {
     this.checked = Math.random() > .5 ? true : false;
     this.sliderValue = 20;
+    this.sliderValueTwo = 10;
   }
 
   btnChange(value: boolean) {
     console.log('btnChange-click: ' + value);
+  }
+
+  myInput() {
+    console.log(this.testValue);
   }
 
 }

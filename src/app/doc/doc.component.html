@@ -10,5 +10,9 @@
     <div style="width: 30%">
       <app-slider [(value)]="sliderValue"></app-slider>
     </div>
-</div>
+    <h4>value - {{sliderValueTwo}}</h4>
+    <div style="width: 30%">
+      <app-slider [(value)]="sliderValueTwo" [step]="5" [min]="0" [max]="80"></app-slider>
+    </div>
+  </div>
 </div>
