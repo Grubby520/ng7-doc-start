@@ -12,6 +12,7 @@ import { InputSwitchComponent } from './common/components/input-switch/input-swi
 import { DocComponent } from './doc/doc.component';
 import { TestComponent } from './test/test.component';
 import { SliderComponent } from './common/components/slider/slider.component';
+import { InputSwitchNgModelComponent } from './common/components/input-switch-ng-model/input-switch-ng-model.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SliderComponent } from './common/components/slider/slider.component';
     InputSwitchComponent,
     DocComponent,
     TestComponent,
-    SliderComponent
+    SliderComponent,
+    InputSwitchNgModelComponent,
   ],
   imports: [
     BrowserModule,

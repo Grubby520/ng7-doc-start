@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocComponent implements OnInit {
   checked: boolean;
+  checked1: boolean;
   sliderValue: number;
   testValue: string;
   sliderValueTwo: number;
+  selectedCities: string[];
 
   constructor() { }
 

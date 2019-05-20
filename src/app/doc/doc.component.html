@@ -4,6 +4,13 @@
     <h4>value - {{checked}}</h4>
     <app-input-switch (changeEvt)="btnChange($event)" [(value)]="checked"></app-input-switch>
   </div>
+
+  <div>
+    <h3>app-input-switch-ng-model</h3>
+    <h4>value - {{checked1}}</h4>
+    <app-input-switch-ng-model [readonly]="false" [disabled]="false" [(ngModel)]="checked1"></app-input-switch-ng-model>
+  </div>
+
   <div>
     <h3>app-slider</h3>
     <h4>value - {{sliderValue}}</h4>
@@ -15,4 +22,14 @@
       <app-slider [(value)]="sliderValueTwo" [step]="5" [min]="0" [max]="80"></app-slider>
     </div>
   </div>
+  <!-- <div>
+    <h3 class="first">Basic</h3>
+    <div class="ui-g" style="width:250px;margin-bottom:10px">
+        <div class="ui-g-12"><app-checkbox value="New York" label="New York" [(ngModel)]="selectedCities" inputId="ny"></app-checkbox></div>
+        <div class="ui-g-12"><app-checkbox value="San Francisco" label="San Francisco" [(ngModel)]="selectedCities" inputId="sf"></app-checkbox></div>
+        <div class="ui-g-12"><app-checkbox value="Los Angeles" label="Los Angeles" [(ngModel)]="selectedCities" inputId="la"></app-checkbox></div>
+    </div>
+
+    Selected Cities: <span *ngFor="let city of selectedCities" style="margin-right:10px">{{city}}</span>
+  </div> -->
 </div>
