@@ -1,5 +1,9 @@
-<div (click)="inClick()" class="app-inputswitch" [ngClass]="{'app-inputswitch-checked': value}">
+<div class="app-inputswitch"
+  (click)="inClick()"
+  [ngClass]="{'app-inputswitch-checked': value}">
   <span class="app-inputswitch-slider"></span>
-  <span class="app-inputswitch-text checked" [hidden]="!value">开</span>
-  <span class="app-inputswitch-text" [hidden]="value">关</span>
+  <span class="app-inputswitch-text checked"
+    [hidden]="!value">开</span>
+  <span class="app-inputswitch-text"
+    [hidden]="value">关</span>
 </div>

@@ -1,7 +1,6 @@
 <div
   [ngClass]="{'app-inputswitch app-widget': true, 'app-inputswitch-checked': checked, 'app-state-disabled': disabled, 'app-inputswitch-readonly': readonly, 'app-inputswitch-focus': focused}"
   [ngStyle]="style"
-  [class]="styleClass"
   (click)="onClick($event, cb)"
   role="checkbox"
   [attr.aria-checked]="checked">
@@ -10,11 +9,13 @@
     [attr.id]="inputId"
     [attr.name]="name"
     [attr.tabindex]="tabindex"
+    [disabled]="disabled"
     [checked]="checked"
     (change)="onInputChange($event)"
     (focus)="onFocus($event)"
-    (blur)="onBlur($event)"
-    [disabled]="disabled" />
+    (blur)="onBlur($event)"/>
   </div>
   <span class="app-inputswitch-slider"></span>
+  <span class="app-inputswitch-text checked" [hidden]="!checked">开</span>
+  <span class="app-inputswitch-text" [hidden]="checked">关</span>
 </div>

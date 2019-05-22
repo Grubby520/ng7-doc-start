@@ -1,4 +1,4 @@
-import { Component, EventEmitter, ChangeDetectorRef, forwardRef, Input, Output } from '@angular/core';
+import { Component, EventEmitter, ChangeDetectorRef, forwardRef, OnChanges, SimpleChanges, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'app-input-switch-ng-model',
@@ -10,31 +10,36 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     multi: true
   }]
 })
-export class InputSwitchNgModelComponent implements ControlValueAccessor {
+export class InputSwitchNgModelComponent implements ControlValueAccessor, OnChanges {
   @Input() style: any;
-  @Input() styleClass: string;
   @Input() tabindex: number;
   @Input() inputId: string;
   @Input() name: string;
   @Input() disabled: boolean;
   @Input() readonly: boolean;
   @Input() checked: boolean; // 是否选中
-  focused: boolean;
+  @Output() change: EventEmitter<any>; // onChange事件
   onModelChange: Function;
   onModelTouched: Function;
 
-  onChange: EventEmitter<any>; // onChange事件
-  value: boolean;
-  change: Function;
+  focused: boolean;
 
   constructor(
     private cd: ChangeDetectorRef
   ) {
+    this.disabled = false;
+    this.readonly = false;
     this.checked = false;
-    this.focused = false;
     this.onModelChange = () => {};
     this.onModelTouched = () => {};
-    this.onChange = new EventEmitter<any>();
+    this.change = new EventEmitter<any>();
+  }
+
+  /**
+   * 输入属性变化的监听函数
+   */
+  ngOnChanges(obj: SimpleChanges) {
+    console.log(obj);
   }
 
   /**
@@ -42,44 +47,49 @@ export class InputSwitchNgModelComponent implements ControlValueAccessor {
    * @param event 组件
    * @param cb 表单元素
    */
-  onClick(event, cb) {
-    console.log(event);
-    console.log(cb);
+  onClick(event: Event, cb: HTMLInputElement): void {
     if (!this.disabled && !this.readonly) {
       this.toggle(event);
-      cb.focus();
+      cb.focus(); // ?
     }
   }
 
-  onInputChange(event) {
-    if (!this.readonly) {
-      this.updateModel(event, event.target.checked);
-    }
-  }
-
-  toggle(event) {
+  /**
+   * 触发切换事件
+   */
+  toggle(event): void {
     this.updateModel(event, !this.checked);
   }
 
-  updateModel(event, value) {
+  /**
+   * 更新model
+   */
+  updateModel(event, value): void {
     this.checked = value;
-    this.onModelChange(this.checked);
-    this.onChange.emit({ // 暴露给外部的回调函数
+    this.onModelChange(this.checked); // model到UI
+    this.change.emit({ // 暴露给外部的钩子函数
       originEvent: event,
       checked: this.checked
     });
   }
 
-  onFocus(event) {
+  onInputChange(event: Event) {
+    if (!this.readonly) {
+      this.updateModel(event, event.target['checked']);
+    }
+  }
+
+  onFocus() {
     this.focused = true;
   }
 
-  onBlur(event) {
+  onBlur() {
     this.focused = false;
     this.onModelTouched();
   }
 
   writeValue(checked: boolean): void {
+    console.log('writeValue');
     this.checked = checked;
     this.cd.markForCheck(); // always脏检查
   }
@@ -88,6 +98,9 @@ export class InputSwitchNgModelComponent implements ControlValueAccessor {
     this.onModelChange = fn;
   }
 
+  /**
+   * 检查 touched
+   */
   registerOnTouched(fn: Function): void {
     this.onModelTouched = fn;
   }

@@ -1,0 +1,35 @@
+$activeColor: #007ad9;
+$normalColor: #a6a6a6;
+$hoverColor: #212121;
+.app-chkbox {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: .25em;
+  user-select: none;
+  .app-chkbox-box {
+    border: 1px solid $normalColor;
+    background-color: #fff;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 2px;
+    text-align: center;
+    border-radius: 3px;
+    transition: background-color .2s, border-color .2s, box-shadow .2s;
+    &.app-state-active {
+      border-color: $activeColor;
+      background-color: $activeColor;
+    }
+    &:not(.app-state-disabled):hover {
+      border-color: $hoverColor;
+    }
+  }
+  .app-chkbox-icon {
+    display: block;
+  }
+}
+
+.app-chkbox-label {
+  vertical-align: middle;
+}

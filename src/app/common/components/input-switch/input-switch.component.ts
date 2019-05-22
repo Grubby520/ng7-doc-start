@@ -1,16 +1,15 @@
-import { Component,Input, Output, EventEmitter } from '@angular/core';
-/**
- * Model Driven Forms ?
- */
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
 @Component({
   selector: 'app-input-switch',
   templateUrl: './input-switch.component.html',
   styleUrls: ['./input-switch.component.scss']
 })
+
 export class InputSwitchComponent {
   @Input() value: boolean;
-  @Output() valueChange = new EventEmitter<any>();
-  @Output() changeEvt = new EventEmitter<any>();
+  @Output() valueChange = new EventEmitter<any>(); // 双向数据绑定
+  @Output() change = new EventEmitter<any>(); // emit到父组件的监听事件
 
   constructor() {
     this.value = false;
@@ -22,6 +21,6 @@ export class InputSwitchComponent {
     // 类到模板
     this.valueChange.emit(this.value);
     // 模板到类，已是最新的值
-    this.changeEvt.emit(this.value);
+    this.change.emit(this.value);
   }
 }

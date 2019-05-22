@@ -1,0 +1,30 @@
+<div
+  [ngStyle]="style"
+  [ngClass]="'app-chkbox app-widget'"
+  [class]="styleClass">
+  <div class="app-helper-hidden-accessible">
+    <input #cb type="checkbox"
+      [attr.id]="inputId"
+      [name]="name"
+      [value]="value"
+      [checked]="checked"
+      [disabled]="disabled"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
+      [ngClass]="{'app-state-focus':focused}"
+      (change)="handleChange($event)"
+      [attr.tabindex]="tabindex">
+  </div>
+  <div class="app-chkbox-box app-widget app-corner-all app-state-default"
+    (click)="onClick($event,cb,true)"
+    [ngClass]="{'app-state-active':checked,'app-state-disabled':disabled,'app-state-focus':focused}">
+    <span class="app-chkbox-icon app-clickable"
+      [ngClass]="{'pi pi-check':checked}"></span>
+  </div>
+</div>
+<label
+  (click)="onClick($event,cb,true)"
+  [class]="labelStyleClass"
+  [ngClass]="{'app-chkbox-label': true, 'app-label-active':checked, 'app-label-disabled':disabled, 'app-label-focus':focused}"
+  *ngIf="label"
+  [attr.for]="inputId">{{label}}</label>
