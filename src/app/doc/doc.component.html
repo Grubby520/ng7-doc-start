@@ -1,35 +1,55 @@
 <div style="margin-left: 20px;">
-  <div>
+  <form [formGroup]="myFormGroup" (ngSubmit)="onSubmit()">
+    <div>
+      <h3 class="first">app-checkbox</h3>
+      <div class="ui-g" style="width:250px;margin-bottom:10px">
+          <div class="ui-g-12"><app-checkbox value="New York" [formControl]="myFormGroup.controls['checkList']" label="New York" [(ngModel)]="checkboxList" inputId="ny"></app-checkbox></div>
+          <div class="ui-g-12"><app-checkbox value="San Francisco" [formControl]="myFormGroup.controls['checkList']" name="chbox" label="San Francisco" [(ngModel)]="checkboxList" inputId="sf"></app-checkbox></div>
+          <div class="ui-g-12"><app-checkbox value="Los Angeles" [formControl]="myFormGroup.controls['checkList']" name="chbox" label="Los Angeles" [(ngModel)]="checkboxList" inputId="la"></app-checkbox></div>
+      </div>
+      <p [hidden]="myFormGroup.controls['checkList'].valid || (myFormGroup.controls['checkList'].pristine)" class="alert alert-danger">
+        这是一个必填项
+      </p>
+      Selected Cities: <span *ngFor="let city of checkboxList" style="margin-right:10px">{{city}}</span>
+    </div>
+    <p>
+      Form Value: {{ myFormGroup.value | json }}
+    </p>
+    <p>
+      Form Status: {{ myFormGroup.status }}
+    </p>
+    <p>
+      <button type="button" [ngStyle]="{'margin-right': '5px'}" (click)="setNormalValue()">setNormalValue</button>
+      <button type="submit" [disabled]="myFormGroup.invalid">Submit</button>
+    </p>
+  </form>
+
+  <div class="mb1">
     <h3>app-input-switch</h3>
     <h4>value - {{checked}}</h4>
-    <app-input-switch (changeEvt)="btnChange($event)" [(value)]="checked"></app-input-switch>
+    <app-input-switch (change)="btnChange($event)" [(value)]="checked"></app-input-switch>
   </div>
 
   <div>
-    <h3>app-input-switch-ng-model</h3>
-    <h4>value - {{checked1}}</h4>
-    <app-input-switch-ng-model [readonly]="false" [disabled]="false" [(ngModel)]="checked1"></app-input-switch-ng-model>
-  </div>
-
+      <div class="mb1">
+        <app-radio (clicks)="handleRadioClick($event)" name="radioList" value="option 1" label="option 1" [(ngModel)]="radioo" inputId="radio1"></app-radio>
+      </div>
+      <div class="mb1">
+        <app-radio (clicks)="handleRadioClick($event)" name="radioList" value="option 2" label="option 2" [(ngModel)]="radioo" inputId="radio2"></app-radio>
+      </div>
+  </div>{{radioo}}
   <div>
-    <h3>app-slider</h3>
+    <!-- <h3>app-slider</h3>
     <h4>value - {{sliderValue}}</h4>
     <div style="width: 30%">
       <app-slider [(value)]="sliderValue"></app-slider>
-    </div>
-    <h4>value - {{sliderValueTwo}}</h4>
+    </div> -->
+    <!-- <h4>value - {{sliderValueTwo}}</h4>
     <div style="width: 30%">
       <app-slider [(value)]="sliderValueTwo" [step]="5" [min]="0" [max]="80"></app-slider>
-    </div>
+    </div> -->
   </div>
-  <!-- <div>
-    <h3 class="first">Basic</h3>
-    <div class="ui-g" style="width:250px;margin-bottom:10px">
-        <div class="ui-g-12"><app-checkbox value="New York" label="New York" [(ngModel)]="selectedCities" inputId="ny"></app-checkbox></div>
-        <div class="ui-g-12"><app-checkbox value="San Francisco" label="San Francisco" [(ngModel)]="selectedCities" inputId="sf"></app-checkbox></div>
-        <div class="ui-g-12"><app-checkbox value="Los Angeles" label="Los Angeles" [(ngModel)]="selectedCities" inputId="la"></app-checkbox></div>
-    </div>
 
-    Selected Cities: <span *ngFor="let city of selectedCities" style="margin-right:10px">{{city}}</span>
-  </div> -->
 </div>
+
+

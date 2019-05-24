@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
+body {
+  font-size: 16px;
+}
+.ui-widget{
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.app-helper-hidden-accessible{
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.form-group .alert{
+  padding: 5px 0 5px 5px;
+  margin-bottom: 10px;
+}
+
+button:disabled {
+  opacity: .85;
+}
+
+label {
+  margin-bottom: 0 !important;
+}
+.mb1{
+  margin-bottom: .8em;
+}
