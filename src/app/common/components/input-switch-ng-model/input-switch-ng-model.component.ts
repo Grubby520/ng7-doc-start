@@ -36,47 +36,17 @@ export class InputSwitchNgModelComponent implements ControlValueAccessor, OnChan
   }
 
   /**
-   * 输入属性变化的监听函数
-   */
-  ngOnChanges(obj: SimpleChanges) {
-    console.log(obj);
-  }
-
-  /**
    * template模板 源事件
-   * @param event 组件
-   * @param cb 表单元素
    */
-  onClick(event: Event, cb: HTMLInputElement): void {
-    if (!this.disabled && !this.readonly) {
+  handleClick(event: Event, rb: HTMLInputElement, focus: boolean): void {
+    if (!this.disabled) {
       this.toggle(event);
-      cb.focus(); // ?
+      rb.focus();
     }
   }
 
-  /**
-   * 触发切换事件
-   */
-  toggle(event): void {
-    this.updateModel(event, !this.checked);
-  }
+  select() {
 
-  /**
-   * 更新model
-   */
-  updateModel(event, value): void {
-    this.checked = value;
-    this.onModelChange(this.checked); // model到UI
-    this.change.emit({ // 暴露给外部的钩子函数
-      originEvent: event,
-      checked: this.checked
-    });
-  }
-
-  onInputChange(event: Event) {
-    if (!this.readonly) {
-      this.updateModel(event, event.target['checked']);
-    }
   }
 
   onFocus() {
@@ -86,6 +56,10 @@ export class InputSwitchNgModelComponent implements ControlValueAccessor, OnChan
   onBlur() {
     this.focused = false;
     this.onModelTouched();
+  }
+
+  onChange() {
+
   }
 
   writeValue(checked: boolean): void {
@@ -98,9 +72,6 @@ export class InputSwitchNgModelComponent implements ControlValueAccessor, OnChan
     this.onModelChange = fn;
   }
 
-  /**
-   * 检查 touched
-   */
   registerOnTouched(fn: Function): void {
     this.onModelTouched = fn;
   }

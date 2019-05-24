@@ -1,0 +1,29 @@
+<div
+  [ngStyle]="style"
+  [ngClass]="'app-radio app-widget'"
+  [class]="styleClass">
+  <div class="app-helper-hidden-accessible">
+    <input #rb type="radio"
+      [attr.id]="inputId"
+      [attr.name]="name"
+      [attr.value]="value"
+      [checked]="checked"
+      [disabled]="disabled"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
+      (change)="onChange($event)"
+      [attr.tabindex]="tabindex">
+    </div>
+    <div class="app-radio-box app-widget app-state-default"
+      (click)="handleClick($event, rb)"
+      [ngClass]="{'app-state-active':checked, 'app-state-disabled':disabled, 'app-state-focus':focused}">
+      <span class="app-radio-icon app-clickable"
+        [ngClass]="{'pi pi-circle-on':checked}"></span>
+  </div>
+</div>
+<label
+  (click)="select()"
+  [class]="labelStyleClass"
+  [ngClass]="{'app-radio-label':true, 'app-label-active':checked, 'app-label-disabled':disabled, 'app-label-focus':focused}"
+  *ngIf="label"
+  [attr.for]="inputId">{{label}}</label>

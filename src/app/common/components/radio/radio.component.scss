@@ -1,0 +1,36 @@
+@import "./../../scss/colors";
+
+.app-radio {
+  display:inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: .25em;
+  user-select: none;
+  .app-radio-box {
+    position: relative;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    border: 1px solid $normalColor;
+    border-radius: 100%;
+    text-align: center;
+    &::before {
+      position: absolute;
+      content: '';
+      width: 50%;
+      height: 50%;
+      left: 25%;
+      top: 25%;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+    &.app-state-active{
+      background-color: $activeColor;
+    }
+  }
+}
+
+
+.app-radio, .app-radio-label {
+  vertical-align: middle;
+}

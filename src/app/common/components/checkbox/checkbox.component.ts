@@ -120,7 +120,6 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
 
   // Angular API 和 DOM 元素之间的桥梁
   writeValue(model) {
-    console.log('writeValueFn');
     this.model = model;
     this.checked = this.isChecked();
     this.cd.markForCheck();
