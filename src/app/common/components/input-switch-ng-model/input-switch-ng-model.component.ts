@@ -1,4 +1,4 @@
-import { Component, EventEmitter, ChangeDetectorRef, forwardRef, OnChanges, SimpleChanges, Input, Output } from '@angular/core';
+import { Component, EventEmitter, ChangeDetectorRef, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'app-input-switch-ng-model',
@@ -10,7 +10,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     multi: true
   }]
 })
-export class InputSwitchNgModelComponent implements ControlValueAccessor, OnChanges {
+export class InputSwitchNgModelComponent implements ControlValueAccessor {
   @Input() style: any;
   @Input() tabindex: number;
   @Input() inputId: string;
@@ -38,15 +38,15 @@ export class InputSwitchNgModelComponent implements ControlValueAccessor, OnChan
   /**
    * template模板 源事件
    */
-  handleClick(event: Event, rb: HTMLInputElement, focus: boolean): void {
+  handleClick(event: Event, rb: HTMLInputElement): void {
     if (!this.disabled) {
       this.toggle(event);
       rb.focus();
     }
   }
 
-  select() {
-
+  toggle(event: Event) {
+    this.checked = !this.checked;
   }
 
   onFocus() {
@@ -58,14 +58,9 @@ export class InputSwitchNgModelComponent implements ControlValueAccessor, OnChan
     this.onModelTouched();
   }
 
-  onChange() {
-
-  }
-
   writeValue(checked: boolean): void {
-    console.log('writeValue');
     this.checked = checked;
-    this.cd.markForCheck(); // always脏检查
+    this.cd.markForCheck(); // 加入脏检查view tree
   }
 
   registerOnChange(fn: Function): void {

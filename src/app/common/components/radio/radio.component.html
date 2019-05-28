@@ -22,7 +22,7 @@
   </div>
 </div>
 <label
-  (click)="select()"
+  (click)="handleClick($event, rb)"
   [class]="labelStyleClass"
   [ngClass]="{'app-radio-label':true, 'app-label-active':checked, 'app-label-disabled':disabled, 'app-label-focus':focused}"
   *ngIf="label"

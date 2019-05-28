@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+import { FormControlValidatorComponent } from './form-validator/form-control-validator/formControlValidator.component';
 import { DocComponent } from './doc/doc.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -12,7 +12,7 @@ const appRoutes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'home', component: HomeComponent
+    path: 'formControl', component: FormControlValidatorComponent
   },
   {
     path: 'doc', component: DocComponent

@@ -19,6 +19,15 @@
   </div>
 
   <div class="form-group">
+    <label for="alterEgo">telephone</label>
+    <input type="text" class="form-control" appLetterValidator letterType="telephone" formControlName="telephone" [(ngModel)]="appFormModel.telephone">
+    <div class="alert alert-danger"
+      [hidden]="appForm.get('telephone').valid || appForm.get('telephone').untouched">
+      {{appForm.getError('result', 'telephone')?.info}}
+    </div>
+  </div>
+
+  <div class="form-group">
     <label for="hobby">hobby</label>
     <div class="mb1"><app-checkbox value="basketball" [formControl]="appForm.controls['hobbyList']" label="basketball" [(ngModel)]="appFormModel.hobbyList" inputId="BT"></app-checkbox></div>
     <div class="mb1"><app-checkbox value="football" [formControl]="appForm.controls['hobbyList']" name="chbox" label="football" [(ngModel)]="appFormModel.hobbyList" inputId="FB"></app-checkbox></div>
@@ -47,6 +56,6 @@
   <p>value: {{appForm.value | json}}</p>
   <p>status: {{appForm.status}}</p>
   <button type="button" class="btn btn-default mr10" (click)="resetForm()">重置</button>
-  <button type="submit" class="btn btn-success" [disabled]="appForm.invalid">提交</button>
+  <button type="submit" class="btn btn-success" [ngClass]="{'btn-disabled': appForm.invalid}" [disabled]="appForm.invalid">提交</button>
 </form>
 

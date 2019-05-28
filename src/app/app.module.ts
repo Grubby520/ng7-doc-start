@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+import { FormControlValidatorComponent } from './form-validator/form-control-validator/formControlValidator.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { InputSwitchComponent } from './common/components/input-switch/input-switch.component';
 import { DocComponent } from './doc/doc.component';
@@ -15,12 +15,14 @@ import { SliderComponent } from './common/components/slider/slider.component';
 import { InputSwitchNgModelComponent } from './common/components/input-switch-ng-model/input-switch-ng-model.component';
 import { CheckboxComponent } from './common/components/checkbox/checkbox.component';
 import { RadioComponent } from './common/components/radio/radio.component';
+import { NgFormValidatorComponent } from './form-validator/ng-form-validator/ng-form-validator.component';
+import { LetterValidatorDirective } from './utils/validators/letter-validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
+    FormControlValidatorComponent,
     PageNotFoundComponent,
     InputSwitchComponent,
     DocComponent,
@@ -29,6 +31,8 @@ import { RadioComponent } from './common/components/radio/radio.component';
     InputSwitchNgModelComponent,
     CheckboxComponent,
     RadioComponent,
+    NgFormValidatorComponent,
+    LetterValidatorDirective,
   ],
   imports: [
     BrowserModule,

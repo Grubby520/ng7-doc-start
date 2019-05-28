@@ -65,8 +65,8 @@ export class RadioComponent implements ControlValueAccessor {
     if (this.isEnable) {
       this.rb.nativeElement.checked = true;
       this.checked = true;
-      this.onModelChange(this.value); // 回传value值，实现双向数据绑定
-      this.clicks.emit(this.value); // 暴露给父组件的函数
+      this.onModelChange(this.value); // model-ui视图
+      this.clicks.emit(this.value);
     }
   }
 

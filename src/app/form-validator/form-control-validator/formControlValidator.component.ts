@@ -1,21 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { HomeModel } from './home-model';
+import { FormControlValidatorModel } from './formControlValidator.model';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-form-control-validator',
+  templateUrl: './formControlValidator.component.html',
+  styleUrls: ['./formControlValidator.component.css']
 })
-export class HomeComponent implements OnInit {
-  appFormModel: HomeModel;
+export class FormControlValidatorComponent implements OnInit {
+  appFormModel: FormControlValidatorModel;
   initFormData: Object;
   appForm: FormGroup;
 
   valids = {
     nameValid(control: FormControl) {
       let msg = '';
-      console.log(control.value);
       if (control.value === null) {
         return null;
       } else if (control.value.length < 2) {
@@ -28,7 +27,6 @@ export class HomeComponent implements OnInit {
     ageValid(control: FormControl) {
       let msg = '';
       const reg = /^[1-9]\d*$/;
-      console.log(control.value);
       if (!reg.test(control.value)) {
         msg = '请输入正整数';
       } else if (Number(control.value) < 18) {
@@ -59,13 +57,14 @@ export class HomeComponent implements OnInit {
       name: ['', [Validators.required, this.valids.nameValid]],
       age: ['', [Validators.required, this.valids.ageValid]],
       hobbyList: [[], this.valids.hobbyValid],
-      sex: ['', Validators.required]
+      sex: ['', Validators.required],
+      telephone: ['', []]
     });
 
     // mock-APICallback
     this.APIAppFormFind((res: any) => {
       this.initFormData = Object.assign({}, res);
-      this.appFormModel = new HomeModel(res);
+      this.appFormModel = new FormControlValidatorModel(res);
     });
     // end
   }
@@ -93,7 +92,8 @@ export class HomeComponent implements OnInit {
       name: 'zhangsan',
       age: '',
       hobbyList: ['football'],
-      sex: ''
+      sex: '',
+      telephone: '13578945644'
     };
     callback(result);
   }
