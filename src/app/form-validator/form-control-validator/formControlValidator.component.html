@@ -2,7 +2,7 @@
 <form [formGroup]="appForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="alterEgo">name</label>
-    <input type="text" class="form-control" formControlName="name" [(ngModel)]="appFormModel.name">
+    <input type="text" class="form-control" formControlName="name" >
     <div class="alert alert-danger"
       [hidden]="appForm.get('name').valid || appForm.get('name').untouched">
       {{appForm.getError('result', 'name')?.info}}
@@ -11,7 +11,7 @@
 
   <div class="form-group">
     <label for="alterEgo">age</label>
-    <input type="text" class="form-control" formControlName="age" [(ngModel)]="appFormModel.age">
+    <input type="text" class="form-control" formControlName="age" >
     <div class="alert alert-danger"
       [hidden]="appForm.get('age').valid || appForm.get('age').untouched">
       {{appForm.getError('result', 'age')?.info}}
@@ -20,7 +20,7 @@
 
   <div class="form-group">
     <label for="alterEgo">telephone</label>
-    <input type="text" class="form-control" appLetterValidator letterType="telephone" formControlName="telephone" [(ngModel)]="appFormModel.telephone">
+    <input type="text" class="form-control" appLetterValidator letterType="telephone" formControlName="telephone">
     <div class="alert alert-danger"
       [hidden]="appForm.get('telephone').valid || appForm.get('telephone').untouched">
       {{appForm.getError('result', 'telephone')?.info}}
@@ -29,9 +29,9 @@
 
   <div class="form-group">
     <label for="hobby">hobby</label>
-    <div class="mb1"><app-checkbox value="basketball" [formControl]="appForm.controls['hobbyList']" label="basketball" [(ngModel)]="appFormModel.hobbyList" inputId="BT"></app-checkbox></div>
-    <div class="mb1"><app-checkbox value="football" [formControl]="appForm.controls['hobbyList']" name="chbox" label="football" [(ngModel)]="appFormModel.hobbyList" inputId="FB"></app-checkbox></div>
-    <div class="mb1"><app-checkbox value="ping-pong" [formControl]="appForm.controls['hobbyList']" name="chbox" label="ping-pong" [(ngModel)]="appFormModel.hobbyList" inputId="PP"></app-checkbox></div>
+    <div class="mb1"><app-checkbox value="basketball" [formControl]="appForm.controls['hobbyList']" label="basketball"  inputId="BT"></app-checkbox></div>
+    <div class="mb1"><app-checkbox value="football" [formControl]="appForm.controls['hobbyList']" name="chbox" label="football" inputId="FB"></app-checkbox></div>
+    <div class="mb1"><app-checkbox value="ping-pong" [formControl]="appForm.controls['hobbyList']" name="chbox" label="ping-pong" inputId="PP"></app-checkbox></div>
     <div class="alert alert-danger"
       [hidden]="appForm.get('hobbyList').valid || appForm.get('hobbyList').untouched">
       {{appForm.getError('result', 'hobbyList')?.info}}
@@ -43,10 +43,10 @@
   </div>
 
   <div class="mb1">
-    <app-radio name="sex" value="1" label="male" formControlName="sex" [(ngModel)]="appFormModel.sex" inputId="sex1"></app-radio>
+    <app-radio name="sex" value="1" label="male" formControlName="sex" inputId="sex1"></app-radio>
   </div>
   <div class="mb1">
-    <app-radio name="sex" value="0" label="female" formControlName="sex" [(ngModel)]="appFormModel.sex" inputId="sex0"></app-radio>
+    <app-radio name="sex" value="0" label="female" formControlName="sex" inputId="sex0"></app-radio>
   </div>
   <div class="alert alert-danger"
     [hidden]="appForm.get('sex').valid || appForm.get('sex').untouched">
@@ -58,4 +58,3 @@
   <button type="button" class="btn btn-default mr10" (click)="resetForm()">重置</button>
   <button type="submit" class="btn btn-success" [ngClass]="{'btn-disabled': appForm.invalid}" [disabled]="appForm.invalid">提交</button>
 </form>
-

@@ -16,9 +16,12 @@ import regExps from './regExps';
 export class LetterValidatorDirective implements Validator {
   @Input('appLetterValidator') letterType: string;
 
-  constructor() { }
+  constructor() {
+    this.letterType = '';
+  }
 
   validate(control: AbstractControl): ValidationErrors|null {
+    console.log(control);
     switch (this.letterType) {
       case 'telephone':
         if (!regExps[this.letterType].test(control.value)) {

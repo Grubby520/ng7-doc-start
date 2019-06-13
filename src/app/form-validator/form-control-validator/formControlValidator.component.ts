@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { FormControlValidatorModel } from './formControlValidator.model';
 
+import { nameValid } from '../../utils/validators/validator.fn';
+
 @Component({
   selector: 'app-form-control-validator',
   templateUrl: './formControlValidator.component.html',
@@ -12,18 +14,9 @@ export class FormControlValidatorComponent implements OnInit {
   initFormData: Object;
   appForm: FormGroup;
 
+  telephone: '13545678977';
+
   valids = {
-    nameValid(control: FormControl) {
-      let msg = '';
-      if (control.value === null) {
-        return null;
-      } else if (control.value.length < 2) {
-        msg = '字符长度不得低于2位';
-      } else if (control.value.length > 8) {
-        msg = '字符长度不得大于8位';
-      }
-      return msg.length ? {result: {info: msg}} : null;
-    },
     ageValid(control: FormControl) {
       let msg = '';
       const reg = /^[1-9]\d*$/;
@@ -54,7 +47,7 @@ export class FormControlValidatorComponent implements OnInit {
     * 有三个方法：control()、group() 和 array()
     */
     this.appForm = this.fb.group({
-      name: ['', [Validators.required, this.valids.nameValid]],
+      name: ['abc', [Validators.required, nameValid]],
       age: ['', [Validators.required, this.valids.ageValid]],
       hobbyList: [[], this.valids.hobbyValid],
       sex: ['', Validators.required],

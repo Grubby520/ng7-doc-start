@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { LetterValidatorDirective } from '../../utils/validators/letter-validator.directive';
 
 @NgModule({
-  imports: [
-    CommonModule,
-  ],
   declarations: [
     LetterValidatorDirective,
+  ],
+  imports: [
+    CommonModule,
   ],
   exports: [
     LetterValidatorDirective,

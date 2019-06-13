@@ -1,0 +1,30 @@
+<form [formGroup]="appForm" (ngSubmit)="onSubmit()">
+  <!-- <div *ngIf="appForm.controls.length">
+    <div *ngFor="let item of appForm.controls; let i=index">
+      {{i}} -->
+      <!-- <div class="form-group">
+        <label for="name">name</label>
+        <input type="text" class="form-control" formControlName="name"> -->
+        <!-- <div class="alert alert-danger"
+          [hidden]="appForm.controls[i].get('name').valid || appForm.controls[i].get('name').untouched">
+          {{appForm.controls[i].getError('result', 'name')?.info}}
+        </div> -->
+      <!-- </div> -->
+
+      <!-- <div class="form-group">
+        <label for="age">age</label>
+        <input type="text" class="form-control" formControlName="age"> -->
+        <!-- <div class="alert alert-danger"
+          [hidden]="appForm.controls[i].get('name').valid || appForm.controls[i].get('name').untouched">
+          {{appForm.controls[i].getError('result', 'name')?.info}}
+        </div> -->
+      <!-- </div> -->
+
+    <!-- </div>
+  </div> -->
+
+  <p>value: {{appForm.value | json}}</p>
+  <p>status: {{appForm.status}}</p>
+  <button type="button" class="btn btn-default mr10" (click)="resetForm()">重置</button>
+  <button type="submit" class="btn btn-success" [ngClass]="{'btn-disabled': appForm.invalid}" [disabled]="appForm.invalid">提交</button>
+</form>

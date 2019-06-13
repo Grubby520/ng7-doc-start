@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { FormControlValidatorComponent } from './form-validator/form-control-validator/formControlValidator.component';
+import { FormArrayValidatorComponent } from './form-validator/form-array-validator/form-array-validator.component';
 import { DocComponent } from './doc/doc.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -13,6 +14,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'formControl', component: FormControlValidatorComponent
+  },
+  {
+    path: 'formArray', component: FormArrayValidatorComponent
   },
   {
     path: 'doc', component: DocComponent

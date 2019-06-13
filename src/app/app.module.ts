@@ -17,6 +17,7 @@ import { CheckboxComponent } from './common/components/checkbox/checkbox.compone
 import { RadioComponent } from './common/components/radio/radio.component';
 import { NgFormValidatorComponent } from './form-validator/ng-form-validator/ng-form-validator.component';
 import { LetterValidatorDirective } from './utils/validators/letter-validator.directive';
+import { FormArrayValidatorComponent } from './form-validator/form-array-validator/form-array-validator.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { LetterValidatorDirective } from './utils/validators/letter-validator.di
     RadioComponent,
     NgFormValidatorComponent,
     LetterValidatorDirective,
+    FormArrayValidatorComponent,
   ],
   imports: [
     BrowserModule,
