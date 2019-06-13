@@ -1,0 +1,168 @@
+.fcnt {
+  display: flex;
+  flex: 0 0 auto; // 固定尺寸
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  background: #777;
+  border-radius: 5px;
+}
+.cnt {
+  height: 30px;
+  width: 30px;
+  background: #fff;
+  border-radius: 30px;
+}
+.fcnt1 {
+  justify-content: flex-start;
+}
+.fcnt2 {
+  justify-content: center;
+}
+.fcnt3 {
+  justify-content: flex-end;
+}
+.fcnt4 {
+  justify-content: flex-start; // 主轴对齐方式
+  align-items: center; // 交叉轴单行对齐方式
+}
+.fcnt5 {
+  justify-content: center;
+  align-items: center;
+}
+.fcnt6 {
+  justify-content: flex-end;
+  align-items: center;
+}
+.fcnt7 {
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.fcnt8 {
+  justify-content: center;
+  align-items: flex-end;
+}
+.fcnt9 {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.fcnt11 {
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.fcnt12 {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.fcnt13 {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  div:nth-child(2) {
+    align-self: center;
+  }
+}
+.fcnt14 {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  div:nth-child(2) {
+    align-self: flex-end;
+  }
+}
+.fcnt15 {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  div:nth-child(2) {
+    align-self: center;
+  }
+}
+.fcnt16 {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  div:nth-child(2) {
+    align-self: flex-end;
+  }
+}
+.fcnt17 {
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  div:nth-child(2) {
+    align-self: flex-end;
+  }
+}
+.fcnt18 {
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.fcnt19 {
+  justify-content: space-between;
+  align-items: flex-end;
+  div:nth-child(2) {
+    align-self: flex-start;
+  }
+}
+.fcnt21 {
+  flex-direction: column;
+  justify-content: space-between;
+}
+.fcnt22 {
+  flex-direction: column;
+  justify-content: space-between;
+  div:nth-child(2) {
+    align-self: center;
+  }
+  div:nth-child(3) {
+    align-self: flex-end;
+  }
+}
+.fcnt23 {
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  div:nth-child(2) {
+    align-self: center;
+  }
+  div:nth-child(3) {
+    align-self: flex-end;
+  }
+}
+.fcnt24 {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.fcnt31 {
+  flex-wrap: wrap;
+  align-content: space-between; // 根据内容，必须与wrap配合同时使用
+  .rows {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.fcnt32 {
+  flex-wrap: wrap;
+  align-content: space-between;
+  .rows {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: space-between;
+    &:nth-child(2) {
+      justify-content: center;
+    }
+  }
+}
+.fcnt33 {
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+  .rows {
+    flex-direction: column;
+    flex-basis: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
